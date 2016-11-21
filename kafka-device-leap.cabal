@@ -1,4 +1,4 @@
-name:                kafka-device-vprn
+name:                kafka-device-vrpn
 version:             0.1.0.0
 synopsis:            VRPN events via a Kafka message broker
 description:         This package contains functions for passing VRPN events to topics on a Kafka message broker.
@@ -11,15 +11,15 @@ category:            Graphics
 build-type:          Simple
 cabal-version:       >= 1.10
 stability:           Experimental
-homepage:            https://bitbucket.org/functionally/kafka-device-vprn
+homepage:            https://bitbucket.org/functionally/kafka-device-vrpn
 bug-reports:         https://bwbush.atlassian.net/projects/HKADEVR/issues/
-package-url:         https://bitbucket.org/functionally/kafka-device-vprn/downloads/kafka-device-vprn-0.1.0.0.tar.gz
+package-url:         https://bitbucket.org/functionally/kafka-device-vrpn/downloads/kafka-device-vrpn-0.1.0.0.tar.gz
 
 extra-source-files:  ReadMe.md
 
 source-repository head
   type: git
-  location: https://bitbucket.org/functionally/kafka-device-vprn
+  location: https://bitbucket.org/functionally/kafka-device-vrpn
  
 library
   exposed-modules:  Network.UI.Kafka.VRPN
@@ -31,7 +31,7 @@ library
   ghc-options:      -Wall
   default-language: Haskell2010
 
-executable kafka-device-vprn
+executable kafka-device-vrpn
   main-is:          Main.hs
   build-depends:    base
                ,    kafka-device
