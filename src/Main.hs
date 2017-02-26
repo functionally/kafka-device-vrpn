@@ -1,6 +1,6 @@
 {-|
 Module      :  Main
-Copyright   :  (c) 2016 Brian W Bush
+Copyright   :  (c) 2016-17 Brian W Bush
 License     :  MIT
 Maintainer  :  Brian W Bush <consult@brianwbush.info>
 Stability   :  Experimental
@@ -16,7 +16,7 @@ module Main (
 ) where
 
 
-import Data.String (fromString)
+import Network.UI.Kafka (TopicConnection(TopicConnection))
 import Network.UI.Kafka.VRPN (vrpnLoop)
 import System.Environment (getArgs)
 
@@ -40,9 +40,7 @@ main =
           (_, loop) <-
             vrpnLoop
               device
-              (fromString client)
-              (fromString host, toEnum $ read port)
-              (fromString topic)
+              (TopicConnection client (host, read port) topic)
               sensor
               callbacks
           result <- loop

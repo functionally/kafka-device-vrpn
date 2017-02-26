@@ -1,6 +1,6 @@
 {-|
 Module      :  Network.UI.Kafka.VRPN
-Copyright   :  (c) 2016 Brian W Bush
+Copyright   :  (c) 2016-17 Brian W Bush
 License     :  MIT
 Maintainer  :  Brian W Bush <consult@brianwbush.info>
 Stability   :  Experimental
@@ -18,9 +18,7 @@ module Network.UI.Kafka.VRPN (
 
 import Control.Concurrent (MVar, forkIO, isEmptyMVar, newEmptyMVar, putMVar, takeMVar)
 import Control.Monad (void, zipWithM_)
-import Network.Kafka (KafkaAddress, KafkaClientId)
-import Network.Kafka.Protocol (TopicName)
-import Network.UI.Kafka (ExitAction, LoopAction, Sensor, producerLoop)
+import Network.UI.Kafka (ExitAction, LoopAction, Sensor, TopicConnection, producerLoop)
 import Network.UI.Kafka.Types (Button(..), Event(..))
 
 import qualified Network.VRPN as V
@@ -41,13 +39,11 @@ data VrpnCallback =
 
 -- | Produce events for a Kafka topic from VRPN callbacks \<<https://hackage.haskell.org/package/vrpn/docs/Network-VRPN.html>\>.
 vrpnLoop :: String                      -- ^ The VRPN host, e.g. spacenav0@localhost.
-         -> KafkaClientId               -- ^ A Kafka client identifier for the producer.
-         -> KafkaAddress                -- ^ The address of the Kafka broker.
-         -> TopicName                   -- ^ The Kafka topic name.
+         -> TopicConnection             -- ^ The Kafka topic name and connection information.
          -> Sensor                      -- ^ The name of the sensor producing events.
          -> [VrpnCallback]              -- ^ Which callbacks to enable.
          -> IO (ExitAction, LoopAction) -- ^ Action to create the exit and loop actions.
-vrpnLoop device clientId address topic sensor callbacks =
+vrpnLoop device topicConnection sensor callbacks =
   do
     exitNow <- newEmptyMVar
     nextEvent <- newEmptyMVar
@@ -61,7 +57,7 @@ vrpnLoop device clientId address topic sensor callbacks =
         , (Dial   , V.Dial    device (Just $ dialCallback     nextEvent)                )
         ]
     (exit, loop) <-
-      producerLoop clientId address topic sensor
+      producerLoop topicConnection sensor
       $ (: [])
       <$> takeMVar nextEvent
     return
