@@ -1,10 +1,10 @@
 {-|
-Module      :  Main
-Copyright   :  (c) 2016-17 Brian W Bush
+Module      :  $Header$
+Copyright   :  (c) 2016-19 Brian W Bush
 License     :  MIT
-Maintainer  :  Brian W Bush <consult@brianwbush.info>
-Stability   :  Experimental
-Portability :  Stable
+Maintainer  :  Brian W Bush <code@functionally.io>
+Stability   :  Production
+Portability :  Linux
 
 Simple producer of VRPN \<<https://github.com/vrpn/vrpn/wiki>\> events to a Kafka topic.
 -}
