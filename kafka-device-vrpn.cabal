@@ -1,5 +1,5 @@
 name         : kafka-device-vrpn
-version      : 1.0.0.0
+version      : 1.0.2.1
 synopsis     : VRPN events via a Kafka message broker
 description  : This package contains functions for passing VRPN \<<https://github.com/vrpn/vrpn/wiki>\> events to topics on a Kafka message broker \<<https://kafka.apache.org/>\>.  Also see \<<https://hackage.haskell.org/package/kafka-device/>\>.
 license      : MIT
@@ -25,7 +25,7 @@ source-repository head
 library
   exposed-modules : Network.UI.Kafka.VRPN
   build-depends   : base         >= 4.8 && < 5
-                  , kafka-device >= 1.0.0
+                  , kafka-device >= 1.0.2.1
                   , vrpn         >= 0.3.0
   hs-source-dirs  : src
   ghc-options     : -Wall
@@ -35,7 +35,7 @@ executable kafka-device-vrpn
   main-is         : Main.hs
   other-modules   : Network.UI.Kafka.VRPN
   build-depends   : base         >= 4.8 && < 5
-                  , kafka-device >= 1.0.0
+                  , kafka-device >= 1.0.2.1
                   , vrpn         >= 0.3.0
   hs-source-dirs  : src
   ghc-options     : -Wall
